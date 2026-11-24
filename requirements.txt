@@ -1,0 +1,4 @@
+# Community Cloud: Python 3.11, CPU only
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.8.0+cpu; sys_platform == "linux"
+-r requirements-c.txt

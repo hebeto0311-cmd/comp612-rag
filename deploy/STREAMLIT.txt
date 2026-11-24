@@ -1,0 +1,10 @@
+Streamlit Community Cloud deployment (not deployed yet)
+
+Upload these extracted files to a GitHub repository root.
+Visit https://share.streamlit.io and create an app from that repository.
+Entrypoint: src/app/streamlit_app.py
+Python: 3.11
+Enter your own API key in the app sidebar, never commit keys.
+Validate memory usage, all retrieval modes, citations and Chinese answers.
+Free apps sleep after 12 hours without traffic; wake before presenting.
+This archive excludes secrets, cached answers and local environments.
