@@ -1,0 +1,38 @@
+/* Quiet, monochrome workspace with a single blue accent. */
+.stApp{background:#fafafa;color:#202124;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue",sans-serif}
+[data-testid="stHeader"]{background:transparent}
+[data-testid="stToolbar"]{display:none}
+[data-testid="stMainBlockContainer"]{max-width:860px;padding:12vh 30px 60px}
+[data-testid="stMainBlockContainer"]:has(.answered){padding-top:48px}
+[data-testid="stSidebar"]{background:#f3f4f6;border-right:1px solid #e7e8eb}
+[data-testid="stSidebar"] h2{font-size:17px;font-weight:600}
+h1,h2,h3,p,label{color:#202124}
+h3{font-size:19px!important;font-weight:600!important;letter-spacing:-.4px}
+.page-heading{text-align:center;margin-bottom:35px}
+.page-heading h1{font-size:32px!important;font-weight:600;letter-spacing:-1.3px;margin:18px 0 0;padding:0;color:#24252a}
+.app-icon{display:grid;place-items:center;margin:auto;width:54px;height:54px;border-radius:17px;background:#24252a;color:#fff;font:500 25px/1 monospace;box-shadow:0 5px 12px #20212412}
+.page-heading.answered{display:flex;align-items:center;gap:12px;text-align:left;margin-bottom:22px}
+.page-heading.answered .app-icon{width:34px;height:34px;border-radius:10px;margin:0;font-size:17px}
+.page-heading.answered h1{font-size:22px!important;margin:0}
+.st-key-composer{background:#fff;border:1px solid #e2e3e7!important;border-radius:22px!important;box-shadow:0 8px 30px #20212407;padding:12px 18px!important}
+.st-key-composer [data-testid="stTextArea"]>div{border:0!important;background:transparent!important;box-shadow:none!important}
+.st-key-composer textarea{background:transparent!important;color:#24252a!important;font-size:17px!important;line-height:1.8;padding:8px 2px!important;resize:none!important;caret-color:#3c60e6}
+.st-key-composer textarea::placeholder{color:#989ba5!important}
+.st-key-composer [data-testid="stTextArea"] small{display:none}
+[data-testid="stButton"] button{background:transparent;border:1px solid #e6e7eb;border-radius:12px;color:#666a75;min-height:40px;font-size:12px;box-shadow:none}
+[data-testid="stButton"] button p{font-size:12px;color:inherit}
+[data-testid="stButton"] button:hover{background:#f0f2f7;border-color:#d4d9e5;color:#24252a}
+[data-testid="stButton"] button[kind="primary"]{background:#315be8;color:#fff;border:0;border-radius:12px;min-height:40px}
+[data-testid="stButton"] button[kind="primary"]:hover{background:#2448cc;color:#fff}
+[data-testid="stButton"] button:disabled{background:#eef0f5;color:#989da9;opacity:1}
+[data-testid="stTextInput"] input{background:#fff;color:#202124}
+[data-baseweb="input"],[data-baseweb="select"]>div{background:#fff!important;color:#202124!important;border-color:#e1e3e8!important;border-radius:10px!important}
+[data-testid="stCaptionContainer"] p{color:#858995;font-size:12px}
+.st-key-answer{background:#fff;border:1px solid #e8e9ee!important;border-radius:18px!important;padding:12px 18px!important}
+.st-key-answer p{line-height:1.95;font-size:16px}
+[data-testid="stExpander"]{background:#fff;border:1px solid #e8e9ee!important;border-radius:12px!important}
+[data-testid="stExpander"] summary p{font-size:13px;color:#606571}
+[data-testid="stMarkdownContainer"] code{color:#3156bf;background:#f0f3fa;border-radius:5px;font-size:.88em}
+[data-testid="stMarkdownContainer"] pre{background:#f5f6f8;border:1px solid #e8e9ee;border-radius:12px}
+[data-testid="stAlert"]{border-radius:14px}
+@media(max-width:640px){[data-testid="stMainBlockContainer"]{padding:10vh 18px 35px}.page-heading h1{font-size:27px!important}.st-key-composer{padding:8px 12px!important}[data-testid="stHorizontalBlock"]{flex-wrap:wrap}}
