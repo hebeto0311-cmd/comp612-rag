@@ -12,8 +12,8 @@ from generation.llm import LLM, LLMError
 
 st.set_page_config(page_title='Python 文档问答', page_icon='🐍', layout='wide', initial_sidebar_state='collapsed')
 st.markdown('<style>' + (Path(__file__).with_name('style.css')).read_text(encoding='utf-8') + '</style>', unsafe_allow_html=True)
-st.markdown('<div class="page-heading ' + ('answered' if 'last_answer' in st.session_state else '') + '"><div class="app-icon">py</div><h1>Python 文档问答</h1></div>', unsafe_allow_html=True)
-with st.sidebar:
+st.markdown('<div class="page-heading"><h1>Python 文档问答</h1></div>', unsafe_allow_html=True)
+with st.popover('设置', use_container_width=False):
     st.header('模型连接')
     base_url = st.text_input('API 服务地址', value=os.getenv('RAG_BASE_URL', 'https://api.deepseek.com'))
     model = st.text_input('模型名称', value=os.getenv('RAG_MODEL', 'deepseek-chat'))
@@ -27,10 +27,7 @@ with st.sidebar:
     use_cache = st.checkbox('使用答案缓存', value=True)
 
 with st.container(border=True, key='composer'):
-    query = st.text_area('你的 Python 问题', placeholder='例如：如何反转一个列表？', max_chars=2000, height=120, key='question', label_visibility='collapsed')
-    _, action = st.columns([4, 1])
-    with action:
-        submit = st.button('发送 ↑', type='primary', disabled=not query.strip(), use_container_width=True)
+    query = st.chat_input('例如：如何反转一个列表？', max_chars=2000, key='question')
 
 if 'last_answer' not in st.session_state:
     def choose_example(text):
@@ -40,10 +37,11 @@ if 'last_answer' not in st.session_state:
         with col:
             st.button(example, on_click=choose_example, args=(example,), use_container_width=True)
 
+submit = bool(query and query.strip())
 if submit:
     service = AnswerService(llm=LLM(api_key=key or None, base_url=base_url, model=model))
     try:
-        with st.spinner('正在检索并阅读文档…'):
+        with st.spinner('正在回答…'):
             result = service.answer(query, mode=mode, variant=variant, k=k, use_cache=use_cache)
         st.session_state['last_answer'] = (query, result, service.last_hits, service.cache_hit, mode, variant)
     except LLMError as exc:
@@ -59,24 +57,25 @@ if submit:
 if 'last_answer' in st.session_state:
     question, result, hits, cached, used_mode, used_variant = st.session_state['last_answer']
     st.subheader('回答')
-    if query.strip() != question:
-        st.caption('问题：' + question)
-    if cached:
-        st.caption('缓存命中')
+    st.caption('问题：' + question)
     if result['refused']:
         st.info(result['answer'])
     else:
         with st.container(border=True, key='answer'):
             st.markdown(result['answer'])
-    st.subheader('参考来源')
+    if result['citations']:
+        st.subheader('参考来源')
     by_id = {h['chunk_id']: h for h in hits}
     for number, cid in enumerate(result['citations'], 1):
-        h = by_id[cid]
+        h = by_id.get(cid)
+        if not h:
+            continue
         with st.expander(str(number).zfill(2) + '  /  ' + h.get('section_path', 'Python 文档'), expanded=False):
             url = h.get('url', '')
             if urlparse(url).scheme == 'https' and urlparse(url).hostname == 'docs.python.org':
                 st.link_button('打开 Python 官方原文', url)
-            st.write(h['text'][:1000])
+            with st.container(height=220):
+                st.write(h['text'])
     with st.expander('查看本次检索片段'):
         for h in hits:
             st.write(h['chunk_id'], '分数：', h['score'])
