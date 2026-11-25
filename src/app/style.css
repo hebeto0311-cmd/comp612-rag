@@ -1,66 +1,44 @@
-/* Quiet, monochrome workspace with a single blue accent. */
-.stApp{background:#fafafa;color:#202124;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue",sans-serif}
-[data-testid="stHeader"]{background:transparent}
-[data-testid="stToolbar"]{display:none}
-[data-testid="stMainBlockContainer"]{max-width:860px;padding:12vh 30px 60px}
-[data-testid="stMainBlockContainer"]:has(.answered){padding-top:48px}
-[data-testid="stSidebar"]{background:#f3f4f6;border-right:1px solid #e7e8eb}
-[data-testid="stSidebar"] h2{font-size:17px;font-weight:600}
-h1,h2,h3,p,label{color:#202124}
-h3{font-size:19px!important;font-weight:600!important;letter-spacing:-.4px}
-.page-heading{text-align:center;margin-bottom:35px}
-.page-heading h1{font-size:32px!important;font-weight:600;letter-spacing:-1.3px;margin:18px 0 0;padding:0;color:#24252a}
-.app-icon{display:grid;place-items:center;margin:auto;width:54px;height:54px;border-radius:17px;background:#24252a;color:#fff;font:500 25px/1 monospace;box-shadow:0 5px 12px #20212412}
-.page-heading.answered{display:flex;align-items:center;gap:12px;text-align:left;margin-bottom:22px}
-.page-heading.answered .app-icon{width:34px;height:34px;border-radius:10px;margin:0;font-size:17px}
-.page-heading.answered h1{font-size:22px!important;margin:0}
-.st-key-composer{background:#fff;border:1px solid #e2e3e7!important;border-radius:22px!important;box-shadow:0 8px 30px #20212407;padding:12px 18px!important}
-.st-key-composer [data-testid="stTextArea"]>div{border:0!important;background:transparent!important;box-shadow:none!important}
-.st-key-composer textarea{background:transparent!important;color:#24252a!important;font-size:17px!important;line-height:1.8;padding:8px 2px!important;resize:none!important;caret-color:#3c60e6}
-.st-key-composer textarea::placeholder{color:#989ba5!important}
-.st-key-composer [data-testid="stTextArea"] small{display:none}
-[data-testid="stButton"] button{background:transparent;border:1px solid #e6e7eb;border-radius:12px;color:#666a75;min-height:40px;font-size:12px;box-shadow:none}
-[data-testid="stButton"] button p{font-size:12px;color:inherit}
-[data-testid="stButton"] button:hover{background:#f0f2f7;border-color:#d4d9e5;color:#24252a}
-[data-testid="stButton"] button[kind="primary"]{background:#315be8;color:#fff;border:0;border-radius:12px;min-height:40px}
-[data-testid="stButton"] button[kind="primary"]:hover{background:#2448cc;color:#fff}
-[data-testid="stButton"] button:disabled{background:#eef0f5;color:#989da9;opacity:1}
-[data-testid="stTextInput"] input{background:#fff;color:#202124}
-[data-baseweb="input"],[data-baseweb="select"]>div{background:#fff!important;color:#202124!important;border-color:#e1e3e8!important;border-radius:10px!important}
-[data-testid="stCaptionContainer"] p{color:#858995;font-size:12px}
-.st-key-answer{background:#fff;border:1px solid #e8e9ee!important;border-radius:18px!important;padding:12px 18px!important}
-.st-key-answer p{line-height:1.95;font-size:16px}
-[data-testid="stExpander"]{background:#fff;border:1px solid #e8e9ee!important;border-radius:12px!important}
-[data-testid="stExpander"] summary p{font-size:13px;color:#606571}
-[data-testid="stMarkdownContainer"] code{color:#3156bf;background:#f0f3fa;border-radius:5px;font-size:.88em}
-[data-testid="stMarkdownContainer"] pre{background:#f5f6f8;border:1px solid #e8e9ee;border-radius:12px}
-[data-testid="stAlert"]{border-radius:14px}
-@media(max-width:640px){[data-testid="stMainBlockContainer"]{padding:10vh 18px 35px}.page-heading h1{font-size:27px!important}.st-key-composer{padding:8px 12px!important}[data-testid="stHorizontalBlock"]{flex-wrap:wrap}}
-/* Fixed light palette, including browser dark-mode overrides. */
-:root{color-scheme:light!important}
-.stApp,[data-testid="stAppViewContainer"]{color-scheme:light!important;background:#fafafa!important;color:#202124!important}
-[data-testid="stMainBlockContainer"]{max-width:860px!important;padding:40px 24px 60px!important}
-.page-heading{text-align:left;margin:0 0 18px}
-.page-heading h1{font-size:26px!important;letter-spacing:-.5px;margin:0!important}
-[data-testid="stPopoverBody"],[data-baseweb="popover"],[data-baseweb="menu"],[role="listbox"],[role="option"]{background:#fff!important;color:#202124!important}
-[data-baseweb="select"] *,[data-testid="stPopoverBody"] label{color:#202124!important}
-[data-testid="stExpander"] details,[data-testid="stExpander"] summary{background:#fff!important;color:#202124!important;border-radius:12px}
-[data-testid="stExpander"] summary:hover{background:#f0f3fa!important}
-[data-testid="stExpander"] summary p{font-size:14px!important;color:#374151!important}
-[data-testid="stAlertContainer"]{background:#eaf2ff!important;color:#163c6c!important;border:1px solid #c9ddfa;border-radius:12px}
+/* Explicit light-blue palette, independent of the OS theme. */
+:root {color-scheme:light!important;--ink:#243b5a;--muted:#627a99;--blue:#3169df;--line:#d6e3f7;--card:#fafcff;--page:#f3f7ff}
+.stApp,[data-testid="stAppViewContainer"],[data-testid="stMain"]{background:var(--page)!important;color:var(--ink)!important;color-scheme:light!important;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif}
+[data-testid="stHeader"]{background:var(--page)!important}
+[data-testid="stMainBlockContainer"]{max-width:900px!important;padding:48px 26px 64px!important}
+h1,h2,h3,p,label{color:var(--ink)}
+.page-heading h1{color:#204b87!important;font-size:28px!important;font-weight:650;margin:0!important;padding:0!important;letter-spacing:-.7px}
+h3{font-size:20px!important;color:#204b87!important}
+.st-key-composer{background:var(--card)!important;border:1px solid var(--line)!important;border-radius:20px!important;padding:14px!important;box-shadow:0 8px 28px #426ca00a;margin-top:16px}
+/* Streamlit chat input has nested themed wrappers; reset every wrapper. */
+[data-testid="stChatInput"],[data-testid="stChatInput"] div{background:var(--card)!important;color:var(--ink)!important;border-color:transparent!important;box-shadow:none!important}
+[data-testid="stChatInput"]{border:0!important;border-radius:12px!important}
+.st-key-composer:focus-within{border-color:#6e9aef!important;box-shadow:0 0 0 3px #3169df12!important}
+[data-testid="stChatInput"] textarea{background:var(--card)!important;color:var(--ink)!important;-webkit-text-fill-color:var(--ink)!important;caret-color:var(--blue);min-height:90px!important;font-size:16px!important;line-height:1.7!important;padding:8px!important}
+[data-testid="stChatInput"] textarea::placeholder{color:#7990ae!important;-webkit-text-fill-color:#7990ae!important}
+[data-testid="stChatInputSubmitButton"]{background:var(--blue)!important;color:#fff!important;border:0!important;border-radius:12px!important;min-width:76px!important;height:42px!important;align-self:flex-end!important;margin:4px!important;display:flex!important;align-items:center;justify-content:center;gap:6px}
+[data-testid="stChatInputSubmitButton"] svg{display:none}
+[data-testid="stChatInputSubmitButton"]::after{content:"发送";font-size:15px;font-weight:600;color:inherit}
+[data-testid="stChatInputSubmitButton"]:hover{background:#2456bd!important}
+[data-testid="stChatInputSubmitButton"]:disabled{background:#e1eaf9!important;color:#8198b8!important}
+[data-testid="stPopoverButton"],[data-testid="stLinkButton"] a,[data-testid="stButton"] button{background:#edf4ff!important;color:#2858a2!important;border:1px solid #cbdcf5!important;border-radius:10px!important;box-shadow:none!important}
+[data-testid="stPopoverButton"] p,[data-testid="stLinkButton"] p,[data-testid="stButton"] p{color:inherit!important}
+[data-testid="stPopoverButton"]:hover,[data-testid="stLinkButton"] a:hover{background:#e0ecff!important;border-color:#92b5ee!important}
+[data-testid="stPopoverBody"],[data-baseweb="popover"],[data-baseweb="menu"],[role="listbox"],[role="option"]{background:var(--card)!important;color:var(--ink)!important;color-scheme:light!important}
+[role="option"]:hover,[aria-selected="true"][role="option"]{background:#e5efff!important}
+[data-baseweb="input"],[data-baseweb="base-input"],[data-baseweb="select"]>div{background:#f1f6ff!important;color:var(--ink)!important;border-color:var(--line)!important}
+[data-baseweb="select"] span,[data-testid="stTextInput"] input{color:var(--ink)!important;-webkit-text-fill-color:var(--ink)!important;background:transparent!important}
+[data-testid="stPopoverBody"] h2{font-size:18px!important}
+.st-key-answer{background:var(--card)!important;border:1px solid var(--line)!important;border-radius:18px!important;padding:18px!important}
+.st-key-answer p{font-size:16px;line-height:1.85}
+[data-testid="stExpander"] details{background:var(--card)!important;border:1px solid var(--line)!important;border-radius:12px!important;overflow:hidden}
+[data-testid="stExpander"] summary{background:#edf4ff!important;color:#335986!important}
+[data-testid="stExpander"] summary p{color:#335986!important;font-size:14px!important}
+[data-testid="stExpander"] summary:hover{background:#e2edff!important}
+[data-testid="stCaptionContainer"] p{font-size:14px!important;color:var(--muted)!important}
+[data-testid="stAlertContainer"]{background:#e5efff!important;color:#234f8c!important;border:1px solid #c6daf8!important;border-radius:12px!important}
 [data-testid="stAlertContainer"] *{color:inherit!important}
-[data-testid="stAlertContainer"][kind="error"]{background:#fff0f0!important;color:#922828!important;border-color:#f2caca}
-[data-testid="stLinkButton"] a,[data-testid="stPopoverButton"]{background:#fff!important;color:#3156bf!important;border:1px solid #ccd5e8!important;border-radius:10px}
-[data-testid="stLinkButton"] a p{color:inherit!important}
-[data-testid="stLinkButton"] a:hover{background:#edf2ff!important}
-[data-testid="stButton"] button p{font-size:14px!important}
-[data-testid="stChatInput"]{background:#fff!important;border:0!important;color:#202124!important}
-[data-testid="stChatInput"] textarea{background:#fff!important;color:#202124!important;-webkit-text-fill-color:#202124!important;min-height:82px!important;font-size:16px!important;line-height:1.6!important;caret-color:#315be8}
-[data-testid="stChatInput"] textarea::placeholder{-webkit-text-fill-color:#697386!important;color:#697386!important}
-[data-testid="stChatInputSubmitButton"]{background:#315be8!important;color:#fff!important;border-radius:10px}
-[data-testid="stChatInputSubmitButton"]:disabled{background:#e7ebf3!important;color:#7b8494!important}
-[data-testid="stMarkdownContainer"] pre,[data-testid="stCode"], [data-testid="stCode"] pre{background:#f3f5f9!important;color:#243047!important}
-[data-testid="stCode"] code{color:#243047!important;background:transparent!important}
-[data-testid="stCaptionContainer"] p{color:#626a78!important;font-size:14px!important}
-[data-testid="stTextInput"] input{color-scheme:light!important;-webkit-text-fill-color:#202124!important}
-@media(max-width:640px){[data-testid="stMainBlockContainer"]{padding:24px 16px 36px!important}.page-heading h1{font-size:23px!important}[data-testid="stHorizontalBlock"]{flex-wrap:wrap!important}[data-testid="stHorizontalBlock"]>[data-testid="stColumn"]{min-width:140px!important;flex:1 1 140px!important}}
+[data-testid="stAlertContainer"][kind="error"], [data-testid="stAlertContainer"]:has([data-testid="stAlertContentError"]){background:#fff0f1!important;color:#9b3544!important;border-color:#f1c9cf!important}
+[data-testid="stMarkdownContainer"] code{background:#e8f0ff!important;color:#285bb0!important;border-radius:5px}
+[data-testid="stCode"],[data-testid="stCode"] pre,[data-testid="stMarkdownContainer"] pre{background:#edf3fd!important;color:var(--ink)!important;border-radius:10px!important}
+[data-testid="stCode"] code,[data-testid="stCode"] span{background:transparent!important;color:#244f88!important}
+[data-testid="stCode"] button{color:#2858a2!important;background:#e1ebfa!important}
+[data-testid="stMarkdownContainer"] a{color:#2864cf!important}
+@media(max-width:640px){[data-testid="stMainBlockContainer"]{padding:28px 16px 40px!important}.page-heading h1{font-size:22px!important}.st-key-composer{padding:8px!important}[data-testid="stHorizontalBlock"]:has(.page-heading){flex-wrap:nowrap!important}[data-testid="stHorizontalBlock"]:has(.page-heading)>[data-testid="stColumn"]{min-width:0!important}.st-key-answer{padding:12px!important}}

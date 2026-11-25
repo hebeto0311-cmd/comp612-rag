@@ -12,30 +12,25 @@ from generation.llm import LLM, LLMError
 
 st.set_page_config(page_title='Python 文档问答', page_icon='🐍', layout='wide', initial_sidebar_state='collapsed')
 st.markdown('<style>' + (Path(__file__).with_name('style.css')).read_text(encoding='utf-8') + '</style>', unsafe_allow_html=True)
-st.markdown('<div class="page-heading"><h1>Python 文档问答</h1></div>', unsafe_allow_html=True)
-with st.popover('设置', use_container_width=False):
-    st.header('模型连接')
-    base_url = st.text_input('API 服务地址', value=os.getenv('RAG_BASE_URL', 'https://api.deepseek.com'))
-    model = st.text_input('模型名称', value=os.getenv('RAG_MODEL', 'deepseek-chat'))
-    key = st.text_input('API Key', type='password', help='仅用于本次会话的模型请求，不写入项目文件。')
-    st.divider()
-    st.header('检索设置')
-    mode = st.selectbox('检索模式', ['hybrid', 'sparse', 'dense'],
-                        format_func=lambda x: {'hybrid': '混合检索', 'sparse': '关键词检索', 'dense': '向量检索'}[x])
-    variant = st.selectbox('数据规模', ['large', 'medium', 'small'])
-    k = st.slider('参考片段数', 1, 10, 5)
-    use_cache = st.checkbox('使用答案缓存', value=True)
+title_col, settings_col = st.columns([5, 1], vertical_alignment='center')
+with title_col:
+    st.markdown('<div class="page-heading"><h1>Python 文档问答</h1></div>', unsafe_allow_html=True)
+with settings_col:
+    with st.popover('设置', use_container_width=False):
+        st.header('模型连接')
+        base_url = st.text_input('API 服务地址', value=os.getenv('RAG_BASE_URL', 'https://api.deepseek.com'))
+        model = st.text_input('模型名称', value=os.getenv('RAG_MODEL', 'deepseek-chat'))
+        key = st.text_input('API Key', type='password', help='仅用于本次会话的模型请求，不写入项目文件。')
+        st.divider()
+        st.header('检索设置')
+        mode = st.selectbox('检索模式', ['hybrid', 'sparse', 'dense'],
+                            format_func=lambda x: {'hybrid': '混合检索', 'sparse': '关键词检索', 'dense': '向量检索'}[x])
+        variant = st.selectbox('数据规模', ['large', 'medium', 'small'])
+        k = st.slider('参考片段数', 1, 10, 5)
+        use_cache = st.checkbox('使用答案缓存', value=True)
 
 with st.container(border=True, key='composer'):
     query = st.chat_input('例如：如何反转一个列表？', max_chars=2000, key='question')
-
-if 'last_answer' not in st.session_state:
-    def choose_example(text):
-        st.session_state['question'] = text
-    examples = ['列表怎么反转？', '如何读取 JSON？', 'async 和 await 怎么用？']
-    for col, example in zip(st.columns(3), examples):
-        with col:
-            st.button(example, on_click=choose_example, args=(example,), use_container_width=True)
 
 submit = bool(query and query.strip())
 if submit:
